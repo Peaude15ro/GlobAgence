@@ -31,9 +31,10 @@ class User
      */
     private $isAdmin;
     /**
-     * @var
+     * @var Role
      */
-    private $role_id;
+    private $role;
+
 
     /**
      * User constructor.
@@ -43,9 +44,9 @@ class User
      * @param $email
      * @param $password
      * @param $isAdmin
-     * @param $role_id
+     * @param Role $role
      */
-    public function __construct($id, $firstname, $lastname, $email, $password, $isAdmin, $role_id)
+    public function __construct($id, $firstname, $lastname, $email, $password, $isAdmin, Role $role)
     {
         $this->id = $id;
         $this->firstname = $firstname;
@@ -53,8 +54,9 @@ class User
         $this->email = $email;
         $this->password = $password;
         $this->isAdmin = $isAdmin;
-        $this->role_id = $role_id;
+        $this->role = $role;
     }
+
 
     /**
      * @return mixed
@@ -153,20 +155,18 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return Role
      */
-    public function getRoleId()
+    public function getRole(): Role
     {
-        return $this->role_id;
+        return $this->role;
     }
 
     /**
-     * @param mixed $role_id
+     * @param Role $role
      */
-    public function setRoleId($role_id): void
+    public function setRole(Role $role): void
     {
-        $this->role_id = $role_id;
+        $this->role = $role;
     }
-
-
 }

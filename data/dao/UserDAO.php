@@ -1,8 +1,6 @@
 <?php
 
-
-class UserDAO{
-    /*
+/*
 Récupérer des enregistrements
 - get()
 - all()
@@ -13,6 +11,9 @@ Insérer ou mettre à jour des enregistrements
 Supprimer des enregistrements
 - delete()
 */
+
+class UserDAO{
+
     public static function all(){
         $request='SELECT * 
             FROM user';
@@ -27,17 +28,23 @@ Supprimer des enregistrements
     }
 
     public static function findOneWithCredentials($userEmail, $userPwd){
-        $request="SELECT id,firstName,lastName,password,email,isAdmin,role_id FROM user WHERE email=? AND password=?";
+        $request="SELECT user.id,firstName,lastName,password,email,isAdmin,role_id, role.name
+                FROM user 
+                JOIN role ON user.role_id = role.id
+                WHERE email=? AND password=?";
         $requestParams=array($userEmail,sha1($userPwd));
         $result=Connection::safeQuery($request,$requestParams);
         if(isset($result[0])) {
+            // Créer un role
+            $role = new Role($result[0]['role_id'], $result[0]['name']);
+            // Créer un user avec ce role
             $user = new User($result[0]['id'],
                             $result[0]['firstName'],
                             $result[0]['lastName'],
                             $result[0]['password'],
                             $result[0]['email'],
                             $result[0]['isAdmin'],
-                            $result[0]['role_id'],
+                            $role
                             );
             return $user;
         }else{
