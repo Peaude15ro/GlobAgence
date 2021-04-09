@@ -1,3 +1,0 @@
-<?php ?>
-
-<p> Bonjour ! </p>

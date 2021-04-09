@@ -39,10 +39,6 @@ switch ($route){
     case 'authenticate':
         AuthenticateController::switchAction($action);
     break;
-    case 'property':
-        PropertyController::switchAction($action);
-        break;
-    default :
         echo '<p>La route spécifiée ('.$route.') n\'existe pas !</p>';
     break;
 }
