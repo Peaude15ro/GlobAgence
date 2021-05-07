@@ -58,7 +58,7 @@ class User extends Model
      */
     public function getFirstname()
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
     /**
@@ -66,7 +66,7 @@ class User extends Model
      */
     public function setFirstname($firstname): void
     {
-        $this->firstname = $firstname;
+        $this->firstName = $firstname;
     }
 
     /**
@@ -74,7 +74,7 @@ class User extends Model
      */
     public function getLastname()
     {
-        return $this->lastname;
+        return $this->lastName;
     }
 
     /**
@@ -82,7 +82,7 @@ class User extends Model
      */
     public function setLastname($lastname): void
     {
-        $this->lastname = $lastname;
+        $this->lastName = $lastname;
     }
 
     /**
@@ -138,6 +138,7 @@ class User extends Model
      */
     public function getRole(): Role
     {
+        $this->role=Role::find($this->role_id);
         return $this->role;
     }
 

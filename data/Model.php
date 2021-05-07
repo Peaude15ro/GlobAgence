@@ -25,4 +25,10 @@ class Model
     {
         return Connection::insert(self::_getTable(),$params,get_called_class());
     }
+
+    public static function find($id)
+    {
+        return self::where('id='.$id)[0];
+
+    }
 }
