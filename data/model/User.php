@@ -4,58 +4,37 @@
 /**
  * Class User
  */
-class User
+class User extends Model
 {
     /**
      * @var
      */
-    private $id;
+    //protected $id;
     /**
      * @var
      */
-    private $firstname;
+    //protected $firstname;
     /**
      * @var
      */
-    private $lastname;
+    //protected $lastname;
     /**
      * @var
      */
-    private $email;
+    //protected $email;
     /**
      * @var
      */
-    private $password;
+    //protected $password;
     /**
      * @var
      */
-    private $isAdmin;
+    //protected $isAdmin;
     /**
      * @var Role
      */
-    private $role;
+    //protected $role;
 
-
-    /**
-     * User constructor.
-     * @param $id
-     * @param $firstname
-     * @param $lastname
-     * @param $email
-     * @param $password
-     * @param $isAdmin
-     * @param Role $role
-     */
-    public function __construct($id, $firstname, $lastname, $email, $password, $isAdmin, Role $role)
-    {
-        $this->id = $id;
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->email = $email;
-        $this->password = $password;
-        $this->isAdmin = $isAdmin;
-        $this->role = $role;
-    }
 
 
     /**
@@ -168,5 +147,14 @@ class User
     public function setRole(Role $role): void
     {
         $this->role = $role;
+    }
+
+    public static function findOneWithCredentials($userEmail, $userPwd)
+    {
+        $results=self::where("email='".$userEmail."' AND password='".sha1($userPwd)."'");
+        if(isset($results[0]))
+            return $results[0];
+        else
+            return null;
     }
 }

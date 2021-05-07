@@ -1,21 +1,11 @@
 <?php
 
 
-class Role
+class Role extends Model
 {
     private int $id;
     private string $name;
 
-    /**
-     * Role constructor.
-     * @param int $id
-     * @param string $name
-     */
-    public function __construct(int $id, string $name)
-    {
-        $this->id = $id;
-        $this->name = $name;
-    }
 
     /**
      * @return int

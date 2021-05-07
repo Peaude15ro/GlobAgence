@@ -35,7 +35,7 @@ class Connection {
     }
 
 
-    public static function safeQuery($query,$array){
+    public static function safeQuery($query,$array,$className){
         if (is_null(self::$_pdo)) {
             self::_get();
         }
@@ -47,7 +47,7 @@ class Connection {
             echo($sth->errorInfo()[2]);
             throw new Exception('Erreur de requête : '.$query);
         }
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $result = $sth->fetchAll(PDO::FETCH_CLASS, $className);
         return $result; 
     }
 
@@ -72,11 +72,11 @@ class Connection {
         return self::$_pdo->exec($query);
     }
 
-    public static function insert($table,$values)
+    public static function insert($table,$values,$className)
     {
         $keys = array_keys($values);
         $points = array_fill(0,count($keys),'?');
         $query='INSERT INTO `'.$table.'`('.implode(',',$keys).') VALUES('.implode(',',$points).');';
-        return Connection::safeQuery($query,array_values($values));
+        return Connection::safeQuery($query,array_values($values),$className);
     }
 }

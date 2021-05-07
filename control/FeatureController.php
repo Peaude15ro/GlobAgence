@@ -22,13 +22,13 @@ class FeatureController{
     private static function defaultAction()
     {
         $tabTitle="Fonctionnalité";
-        $examples=ExampleDAO::all();
+        $examples=Example::all();
         include('../page/feature/index.php');
     }
 
     private static function addExampleAction()
     {
-        ExampleDAO::save($_POST['name']);
+        Example::create($_POST);
         header('Location:.?route=feature');
     }
 }
